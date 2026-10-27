@@ -125,6 +125,16 @@ The assigned secret must reach shell tools; an unassigned host token and Codex's
 own login keys must remain unavailable. Verify the same delivery without an
 agent identity. Shell-policy metadata must contain names rather than values.
 
+For Legacy Codex CLI with its own `OPENAI_API_KEY`, the server-assigned per-agent
+home also receives `PAPERCLIP_CODEX_PROVIDERS` before remote staging. The merge
+keeps the selected model and isolated authentication, then restores the original
+configuration on teardown. An explicit external home, account-cache home,
+another agent's home, or arbitrary company subdirectory does not opt into this
+API-key path. The [remote execution regression](../../packages/adapters/codex-local/src/server/execute.remote.test.ts)
+checks the actual adapter, filesystem preparation, staged configuration and
+cleanup with mocked SSH and process execution. It does not invoke a model or
+prove live gateway authentication.
+
 Choose Codex as the harness; the UI displays its name/icon for both runners.
 Advanced identifies the automatic default and offers Paperclip Runner or Legacy.
 New Codex agents default to the native runner on supported macOS or GNU/Linux

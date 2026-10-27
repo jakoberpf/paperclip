@@ -773,9 +773,13 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
       (entry): entry is [string, string] => typeof entry[1] === "string",
     ),
   );
+  const configuredHomeIsAgentKeyHome =
+    configuredHomeIsManaged &&
+    configuredOpenAiApiKey !== null &&
+    configuredCodexHome === path.resolve(defaultCodexHome, "..", "agents", agent.id, "codex-home");
   const preparedRuntimeConfig = await prepareCodexRuntimeConfig({
     env: envConfigStrings,
-    codexHome: configuredCodexHome && !runtimeSkillDigest ? null : effectiveCodexHome,
+    codexHome: configuredCodexHome && !runtimeSkillDigest && !configuredHomeIsAgentKeyHome ? null : effectiveCodexHome,
   });
   // Curated allowlist dir staged for the remote `home` asset (see below). Held
   // here so the outer `finally` can remove it on every exit path (teardown and
