@@ -132,7 +132,8 @@ lock covers seeding and configuration: remote runs snapshot, restore, and releas
 before launch; local runs hold ownership through process completion and cleanup.
 Contending preparation fails immediately with `codex_home_busy`, without changing
 home configuration or credentials or starting provider work. This also applies
-when the provider book is absent; there is no wait, retry, or cancellation queue.
+when the provider book is absent; there is no wait or cancellation queue and no
+new retry mechanism. Existing host recovery policy remains unchanged.
 Default-company-home and generated-skill-home behavior is unchanged. External,
 subscription-only, account-cache, other-agent, and arbitrary company homes do not
 opt into this API-key path.

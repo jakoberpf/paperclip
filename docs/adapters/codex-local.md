@@ -78,7 +78,8 @@ canonical per-agent API-key homes even when the provider book is absent:
 - **Local execution:** retain the lock through process completion and
   configuration cleanup. An overlapping invocation for the same home fails
   immediately with `codex_home_busy`, before changing that home's configuration
-  or credentials and before starting provider work. It does not wait or retry.
+  or credentials and before starting provider work. The adapter does not wait
+  or add a retry mechanism; existing host recovery policy remains unchanged.
 - Remote preparation also fails fast if another preparation or local run owns
   the home. Runs for different homes remain independent.
 - The lock is OS-owned, not age-based; a contender cannot steal it. Cleanup
